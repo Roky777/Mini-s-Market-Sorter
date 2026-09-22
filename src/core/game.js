@@ -48,7 +48,9 @@ export function createGame({ persistProgress = true } = {}) {
     return bag;
   };
   const targetOnBelt = () => level().maxOnBelt;
-  const maximumInFlight = () => targetOnBelt();
+  // Keep one replacement staged just outside the lane. This preserves the
+  // requested visible count while preventing a dead pause after an item exits.
+  const maximumInFlight = () => targetOnBelt() + 1;
   const itemWidthFor = (width = beltWidth) => Math.max(78, Math.min(DEFAULT_ITEM_WIDTH, width * 0.1));
   // Responsive but bounded spacing keeps objects clearly separated on both
   // narrow phones and wide desktop layouts.
@@ -66,9 +68,9 @@ export function createGame({ persistProgress = true } = {}) {
     return item.x + width + (visualFootprintFor(item, fallbackWidth) - width) / 2;
   };
   const spawnInterval = () => {
-    const widestItem = itemWidthFor() * 1.08;
     const pixelsPerSecond = Math.max(1, beltWidth * BELT_TRAVEL_RATE);
-    return ((widestItem + minimumItemGapFor()) / pixelsPerSecond) * 1000;
+    const visibleSlotDistance = beltWidth / targetOnBelt();
+    return (visibleSlotDistance / pixelsPerSecond) * 1000;
   };
 
   function entryHasRoom(spawnWidth) {
@@ -225,7 +227,7 @@ export function createGame({ persistProgress = true } = {}) {
 
   function ensureBeltPopulation() {
     if (state.paused || tutorial?.active || state.completedLevel || state.completedMastery >= state.totalRequired) return;
-    if (state.activeItems.length < targetOnBelt()) scheduleSpawn(120);
+    if (state.activeItems.length < maximumInFlight()) scheduleSpawn(120);
   }
 
   function loadBelt() {
