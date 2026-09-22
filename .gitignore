@@ -1,4 +1,11 @@
 .DS_Store
+node_modules/
+www/
+.gradle-home/
+android/.gradle/
+android/build/
+android/app/build/
+*.apk
 
 # Local source exports and superseded animation/audio takes. Only the
 # production files referenced by the runtime are committed.

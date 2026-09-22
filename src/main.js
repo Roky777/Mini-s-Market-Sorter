@@ -1,4 +1,4 @@
-import { createGame } from "./core/game.js?v=20260922-stream-ui-3";
+import { createGame } from "./core/game.js?v=20260922-responsive-4";
 import { startConveyorAnimation } from "./render/conveyor.js";
 import { assets, hydrateDeferredImages, preloadImage, preloadLevelAssets } from "./data/assets.js";
 import { getLevel, MATH_LEVELS } from "./data/math-levels.js";

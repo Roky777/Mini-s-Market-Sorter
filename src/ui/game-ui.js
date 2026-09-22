@@ -100,11 +100,13 @@ export function renderGameUi(state, level) {
     pause.innerHTML = `
       <img class="pause-screen__background" src="assets/backgrounds/market_blur.png" alt="" />
       <img class="pause-screen__mascot" src="assets/ui/12_peek_wave_2048 2.png" alt="Sparky waving" />
-      <img class="pause-screen__panel" src="assets/ui/21699a15ad6312465e63b85b73ddad4fbd18816d.png" alt="Take a Break" />
-      <div class="pause-screen__controls">
-        <button class="pause-screen__hotspot pause-screen__hotspot--resume" data-action="resume" type="button" aria-label="Resume game"></button>
-        <button class="pause-screen__hotspot pause-screen__hotspot--restart" data-action="request-restart" type="button" aria-label="Restart level"></button>
-        <button class="pause-screen__hotspot pause-screen__hotspot--home" data-action="home" type="button" aria-label="Return home and preserve progress"></button>
+      <div class="pause-screen__menu">
+        <img class="pause-screen__panel" src="assets/ui/21699a15ad6312465e63b85b73ddad4fbd18816d.png" alt="Take a Break" />
+        <div class="pause-screen__controls">
+          <button class="pause-screen__hotspot pause-screen__hotspot--resume" data-action="resume" type="button" aria-label="Resume game"></button>
+          <button class="pause-screen__hotspot pause-screen__hotspot--restart" data-action="request-restart" type="button" aria-label="Restart level"></button>
+          <button class="pause-screen__hotspot pause-screen__hotspot--home" data-action="home" type="button" aria-label="Return home and preserve progress"></button>
+        </div>
       </div>`;
     if (state.restartConfirm) {
       const confirm = document.createElement("div");

@@ -5,7 +5,7 @@ import { createSounds } from "./sounds.js";
 import { renderHud } from "../render/hud.js";
 import { renderScene } from "../render/scene.js";
 import { BELT_TRAVEL_RATE } from "../render/conveyor.js";
-import { renderGameUi } from "../ui/game-ui.js";
+import { renderGameUi } from "../ui/game-ui.js?v=20260922-responsive-3";
 import { TutorialController } from "../tutorial/tutorial-controller.js";
 import { clearGameSave, readGameSave, saveHighestLevel } from "./save.js";
 import { preloadLevelAssets } from "../data/assets.js";
@@ -226,7 +226,15 @@ export function createGame({ persistProgress = true } = {}) {
   }
 
   function ensureBeltPopulation() {
-    if (state.paused || tutorial?.active || state.completedLevel || state.completedMastery >= state.totalRequired) return;
+    if (state.completedLevel) return;
+    // Recover cleanly if a mobile WebView suspends the short final-drop timer.
+    // Once the placed-item animation has finished, reaching the goal must always
+    // open the success screen instead of leaving an empty conveyor behind.
+    if (state.totalRequired > 0 && state.completedMastery >= state.totalRequired) {
+      if (!state.placed) finishLevel();
+      return;
+    }
+    if (state.paused || tutorial?.active) return;
     if (state.activeItems.length < maximumInFlight()) scheduleSpawn(120);
   }
 
@@ -327,7 +335,10 @@ export function createGame({ persistProgress = true } = {}) {
 
   function finishLevel() {
     if (state.completedLevel) return;
+    window.clearTimeout(spawnTimer);
+    spawnTimer = undefined;
     state.activeItems = [];
+    state.placed = null;
     const starBaseline = state.totalRequired * 10 + Math.floor(state.totalRequired / 5) * 5;
     const starRatio = starBaseline ? state.levelScore / starBaseline : 1;
     state.stars = starRatio >= 0.8 ? 3 : starRatio >= 0.45 ? 2 : 1;
@@ -449,6 +460,14 @@ export function createGame({ persistProgress = true } = {}) {
       advanceTimer = window.setTimeout(() => {
         // Remove it before presenting feedback or allowing the next belt item.
         state.placed = null;
+        // Complete directly after the final bin-drop animation. Do not route
+        // the transition through the ordinary feedback timer: that callback
+        // can be throttled or interrupted when an Android WebView changes
+        // lifecycle state, which previously left the game on an empty belt.
+        if (state.completedMastery >= state.totalRequired) {
+          finishLevel();
+          return;
+        }
         state.feedback = {
           type: newlyMastered ? "mastered" : "correct",
           message: `${rewardTitle ?? (newlyMastered ? "Mastered!" : "Great job!")} +${points + bonus}`,
@@ -463,7 +482,6 @@ export function createGame({ persistProgress = true } = {}) {
         }
         render();
         feedbackTimer = window.setTimeout(() => {
-          if (state.completedMastery >= state.totalRequired) return finishLevel();
           state.feedback = null;
           render();
           ensureBeltPopulation();
