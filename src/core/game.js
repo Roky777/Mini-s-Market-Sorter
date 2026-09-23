@@ -5,7 +5,7 @@ import { createSounds } from "./sounds.js?v=20260923-runtime-smooth-2";
 import { renderHud } from "../render/hud.js";
 import { renderScene } from "../render/scene.js?v=20260923-runtime-smooth-2";
 import { BELT_TRAVEL_RATE } from "../render/conveyor.js";
-import { renderGameUi } from "../ui/game-ui.js?v=20260923-runtime-smooth-2";
+import { renderGameUi } from "../ui/game-ui.js?v=20260923-victory-board-1";
 import { TutorialController } from "../tutorial/tutorial-controller.js";
 import { clearGameSave, readGameSave, saveHighestLevel } from "./save.js";
 import { preloadLevelAssets } from "../data/assets.js?v=20260923-runtime-smooth-2";

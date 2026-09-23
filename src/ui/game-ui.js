@@ -14,26 +14,30 @@ export function renderGameUi(state, level) {
     const card = document.createElement("article");
     card.className = "game-certificate";
     card.innerHTML = `
-      <div class="game-certificate__sparkles" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
+      <div class="game-certificate__rays" aria-hidden="true"></div>
+      <div class="game-certificate__sparkles" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i></div>
       <div class="game-certificate__crest" aria-hidden="true"><span>★</span></div>
+      <div class="game-certificate__ribbon"><span>All levels complete</span></div>
       <p class="game-certificate__eyebrow">Mini's Market Champion</p>
-      <h2>Market Sorting <em>Master!</em></h2>
-      <p class="game-certificate__subtitle">All ${MATH_LEVELS.length} levels complete!</p>
+      <h2>Market <em>Master!</em></h2>
+      <div class="game-certificate__victory-stars" aria-label="Campaign victory">
+        <i>★</i><i>★</i><i>★</i>
+      </div>
       <div class="game-certificate__results" aria-label="Campaign results">
-        <div><i aria-hidden="true">★</i><span><small>Score</small><strong>${state.score}</strong></span></div>
-        <div><i aria-hidden="true">★</i><span><small>Stars</small><strong>${state.campaignStars}<b>/${MATH_LEVELS.length * 3}</b></strong></span></div>
-        <div><i aria-hidden="true">✓</i><span><small>First try</small><strong>${accuracy}<b>%</b></strong></span></div>
+        <div class="game-certificate__score"><small>Total score</small><strong><i aria-hidden="true">★</i>${state.score}</strong></div>
+        <div class="game-certificate__stat"><small>Stars won</small><strong>${state.campaignStars}<b>/${MATH_LEVELS.length * 3}</b></strong></div>
+        <div class="game-certificate__stat"><small>First try</small><strong>${accuracy}<b>%</b></strong></div>
       </div>
       <div class="game-certificate__stamps" aria-label="Skills mastered">
-        <div class="game-certificate__stamp game-certificate__stamp--shapes"><i aria-hidden="true">🍎</i><strong>Foods</strong></div>
-        <div class="game-certificate__stamp game-certificate__stamp--families"><i aria-hidden="true">🎨</i><strong>Colours</strong></div>
-        <div class="game-certificate__stamp game-certificate__stamp--motion"><i aria-hidden="true">🌸</i><strong>Market</strong></div>
+        <div class="game-certificate__stamp game-certificate__stamp--foods"><i aria-hidden="true"><img src="assets/GRADE%201/english%20game/level%201/apple%20(1).webp" alt="" /></i><strong>Foods</strong></div>
+        <div class="game-certificate__stamp game-certificate__stamp--colours"><i aria-hidden="true"><b></b><b></b><b></b></i><strong>Colours</strong></div>
+        <div class="game-certificate__stamp game-certificate__stamp--market"><i aria-hidden="true"><img src="assets/GRADE%201/english%20game/generated/rose.webp" alt="" /></i><strong>Market</strong></div>
       </div>
       <div class="game-certificate__action"></div>`;
     const restart = document.createElement("button");
     restart.className = "game-modal__button";
     restart.dataset.action = "restart";
-    restart.innerHTML = `<span>Play Again</span><i aria-hidden="true">›</i>`;
+    restart.innerHTML = `<span>Play Again</span><i aria-hidden="true">▶</i>`;
     card.querySelector(".game-certificate__action").append(restart);
     screen.append(card);
     root.append(screen);
