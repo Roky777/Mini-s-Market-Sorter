@@ -6,6 +6,7 @@ const LEVELS = [
     instruction: "Sort each picture into fruit or vegetable.",
     showNames: true,
     maxOnBelt: 3,
+    beltTravelRate: 0.08,
     bins: [
       { id: "fruit", label: "Fruit", art: "apple" },
       { id: "vegetable", label: "Vegetable", art: "carrot" },
@@ -23,6 +24,7 @@ const LEVELS = [
     instruction: "Sort each picture by its colour.",
     showNames: false,
     maxOnBelt: 4,
+    beltTravelRate: 0.076,
     bins: [
       { id: "red", label: "Red", art: "apple" },
       { id: "yellow", label: "Yellow", art: "mango" },
@@ -41,6 +43,7 @@ const LEVELS = [
     instruction: "Sort fruits, vegetables, and flowers.",
     showNames: true,
     maxOnBelt: 4,
+    beltTravelRate: 0.076,
     bins: [
       { id: "fruits", label: "Fruits", art: "apple" },
       { id: "vegetables", label: "Vegetables", art: "carrot" },

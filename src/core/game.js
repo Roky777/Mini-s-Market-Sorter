@@ -1,10 +1,10 @@
-import { getLevel, MATH_LEVELS } from "../data/math-levels.js";
+import { getLevel, MATH_LEVELS } from "../data/math-levels.js?v=20260923-level-pacing-1";
 import { createInitialState } from "./state.js?v=20260923-xp-smooth-1";
 import { bindInput } from "./input.js";
 import { createSounds } from "./sounds.js?v=20260923-xp-smooth-1";
 import { renderHud } from "../render/hud.js";
 import { renderScene } from "../render/scene.js?v=20260923-runtime-smooth-2";
-import { BELT_TRAVEL_RATE } from "../render/conveyor.js";
+import { getBeltTravelRate, setBeltTravelRate } from "../render/conveyor.js?v=20260923-level-pacing-1";
 import { renderGameUi } from "../ui/game-ui.js?v=20260923-xp-smooth-1";
 import { TutorialController } from "../tutorial/tutorial-controller.js";
 import { clearGameSave, readGameSave, saveHighestLevel } from "./save.js";
@@ -89,7 +89,7 @@ export function createGame({ persistProgress = true, gameId = "Mini-s-Market-Sor
     return item.x + width + (visualFootprintFor(item, fallbackWidth) - width) / 2;
   };
   const spawnInterval = () => {
-    const pixelsPerSecond = Math.max(1, beltWidth * BELT_TRAVEL_RATE);
+    const pixelsPerSecond = Math.max(1, beltWidth * getBeltTravelRate());
     const visibleSlotDistance = beltWidth / targetOnBelt();
     return (visibleSlotDistance / pixelsPerSecond) * 1000;
   };
@@ -268,6 +268,7 @@ export function createGame({ persistProgress = true, gameId = "Mini-s-Market-Sor
   }
 
   function loadBelt() {
+    setBeltTravelRate(level().beltTravelRate);
     // Warm only the active level. Later levels stay off the network until the
     // player reaches them, while the browser can decode this level in parallel.
     preloadLevelAssets(level());
