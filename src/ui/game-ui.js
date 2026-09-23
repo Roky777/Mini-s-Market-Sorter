@@ -18,7 +18,6 @@ export function renderGameUi(state, level) {
     const card = document.createElement("article");
     card.className = "game-certificate";
     card.innerHTML = `
-      <div class="game-certificate__rays" aria-hidden="true"></div>
       <div class="game-certificate__sparkles" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i></div>
       <div class="game-certificate__crest" aria-hidden="true"><span>★</span></div>
       <div class="game-certificate__ribbon"><span>All levels complete</span></div>

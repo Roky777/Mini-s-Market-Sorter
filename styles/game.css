@@ -894,6 +894,44 @@ body.game-runtime-loaded .conveyor__front-beam {
 .game-certificate__sparkles i:nth-child(4) { right: 9%; bottom: 14%; animation-delay: -950ms; }
 .game-certificate__sparkles i:nth-child(5) { top: 50%; left: 4%; width: clamp(.28rem, .48cqw, .48rem); animation-delay: -250ms; }
 .game-certificate__sparkles i:nth-child(6) { top: 51%; right: 4%; width: clamp(.3rem, .55cqw, .55rem); animation-delay: -620ms; }
+
+/* Premium certificate composition: every section participates in one calm
+   vertical rhythm instead of relying on overlapping absolute offsets. */
+.game-certificate {
+  --certificate-gap-xs: clamp(.14rem, .36cqh, .3rem);
+  --certificate-gap-sm: clamp(.3rem, .7cqh, .55rem);
+  --certificate-gap-md: clamp(.48rem, 1.05cqh, .8rem);
+  row-gap: var(--certificate-gap-xs);
+  width: min(70cqw, 60rem);
+  padding: clamp(3.6rem, 10cqh, 5.5rem) clamp(1.3rem, 4cqw, 3.6rem) clamp(.85rem, 2.2cqh, 1.4rem);
+}
+.game-certificate__rays { display: none; }
+.game-certificate__ribbon {
+  position: relative;
+  top: auto;
+  left: auto;
+  width: min(62%, 25rem);
+  min-width: 0;
+  margin: 0 0 var(--certificate-gap-sm);
+  box-sizing: border-box;
+  transform: none;
+}
+.game-certificate__eyebrow { margin: 0; }
+.game-certificate h2 { margin: 0 0 var(--certificate-gap-sm); }
+.game-certificate__victory-stars {
+  height: clamp(2.8rem, 9.5cqh, 5.4rem);
+  margin: 0 0 var(--certificate-gap-md);
+}
+.game-certificate__results {
+  width: min(92%, 50rem);
+  margin: 0 0 var(--certificate-gap-md);
+}
+.game-certificate__results > div { padding-inline: clamp(.5rem, 1cqw, .9rem); }
+.game-certificate__stamps {
+  gap: clamp(1rem, 2.35cqw, 2rem);
+  margin: 0 0 var(--certificate-gap-md);
+}
+.game-certificate__action { margin-top: var(--certificate-gap-xs); }
 @keyframes certificate-arrive { from { opacity: 0; transform: translateY(5%) scale(.92); } to { opacity: 1; transform: none; } }
 @keyframes certificate-crest-pop { from { opacity: 0; transform: translate(-50%, -30%) scale(.35) rotate(-18deg); } to { opacity: 1; transform: translate(-50%, -50%) scale(1) rotate(0); } }
 @keyframes certificate-star-win { from { opacity: 0; filter: brightness(2); transform: translateY(40%) scale(.18) rotate(-18deg); } }

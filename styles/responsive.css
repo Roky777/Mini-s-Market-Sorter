@@ -247,7 +247,7 @@ body {
   .game-certificate {
     width: min(72vw, 50rem);
     max-height: 94dvh;
-    padding-top: clamp(2.8rem, 15cqh, 4.2rem);
+    padding-top: clamp(2.7rem, 14cqh, 3.8rem);
     padding-bottom: .5rem;
   }
 
@@ -261,5 +261,5 @@ body {
   }
 
   .game-certificate__victory-stars { height: clamp(2.3rem, 14cqh, 4.2rem); }
-  .game-certificate__ribbon { top: clamp(2.1rem, 10cqh, 3rem); }
+  .game-certificate__ribbon { top: auto; margin-bottom: .15rem; }
 }
