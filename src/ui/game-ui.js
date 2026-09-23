@@ -25,6 +25,7 @@ export function renderGameUi(state, level) {
       </div>
       <div class="game-certificate__results" aria-label="Campaign results">
         <div class="game-certificate__score"><small>Total score</small><strong><i aria-hidden="true">★</i>${state.score}</strong></div>
+        <div class="game-certificate__stat game-certificate__stat--xp"><small>XP earned</small><strong>${state.campaignXp}<b>/200</b></strong></div>
         <div class="game-certificate__stat"><small>Stars won</small><strong>${state.campaignStars}<b>/${MATH_LEVELS.length * 3}</b></strong></div>
         <div class="game-certificate__stat"><small>First try</small><strong>${accuracy}<b>%</b></strong></div>
       </div>
@@ -77,7 +78,10 @@ export function renderGameUi(state, level) {
             "success-star-3.webp",
           ].map((source, index) => `<span class="success-star success-star--${index + 1}${index < state.stars ? " success-star--earned" : ""}" style="--star-index:${index}"><img src="assets/ui/${source}" alt="" /></span>`).join("")}
         </div>
-        <p class="success-screen__score"><span>Level score</span><strong>${state.levelScore}</strong></p>
+        <div class="success-screen__stats">
+          <p class="success-screen__score"><span>Level score</span><strong>${state.levelScore}</strong></p>
+          <p class="success-screen__xp"><span>XP earned</span><strong>+${state.levelXp}</strong></p>
+        </div>
         <div class="success-screen__actions"></div>
       </div>`;
     const actions = success.querySelector(".success-screen__actions");
