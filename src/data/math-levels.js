@@ -3,7 +3,7 @@ const item = (name, art, answer) => ({ name, art, answer });
 const LEVELS = [
   {
     title: "Fruit or Vegetable?",
-    instruction: "Sort each picture into fruit or vegetable.",
+    instruction: "Sort by everyday food use: fruit or vegetable.",
     showNames: true,
     maxOnBelt: 3,
     beltTravelRate: 0.08,
@@ -31,11 +31,11 @@ const LEVELS = [
       { id: "green", label: "Green", art: "guava" },
     ],
     items: [
-      item("Apple", "apple", "red"), item("Tomato", "tomato", "red"),
-      item("Red chilli", "chilli", "red"), item("Mango", "mango", "yellow"),
-      item("Banana", "banana", "yellow"), item("Lemon", "lemon", "yellow"),
-      item("Guava", "guava", "green"), item("Peas", "peas", "green"),
-      item("Cabbage", "cabbage", "green"), item("Green capsicum", "capsicum", "green"),
+      item("Red apple", "apple", "red"), item("Red tomato", "tomato", "red"),
+      item("Red chilli", "chilli", "red"), item("Yellow mango", "mango", "yellow"),
+      item("Yellow banana", "banana", "yellow"), item("Yellow lemon", "lemon", "yellow"),
+      item("Green guava", "guava", "green"), item("Green peas", "peas", "green"),
+      item("Green cabbage", "cabbage", "green"), item("Green capsicum", "capsicum", "green"),
     ],
   },
   {
